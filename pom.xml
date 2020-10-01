@@ -1,0 +1,130 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.rabit</groupId>
+	<artifactId>AutoRABIT-FunctionalTests</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<testng.version>6.11</testng.version>
+		<selenium-java.version>3.14.0</selenium-java.version>
+		<poi.version>4.0.0</poi.version>
+		<guava.version>23.0</guava.version>
+		<gson.version>2.8.2</gson.version>
+		<commons-io.version>2.6</commons-io.version>
+	  	<extentreports.version>3.1.5</extentreports.version>
+	  	<java.version>1.8</java.version>
+	  	<maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+	  	<commons-lang3.version>3.8.1</commons-lang3.version>
+	  	<suite>custom</suite>
+	   	<!-- <browser>chrome</browser>  -->
+	</properties>
+	<dependencies>
+		<!-- TestNG -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		<!-- Selenium -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium-java.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.code.gson</groupId>
+					<artifactId>gson</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Apache POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- GSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+	   		<version>${gson.version}</version>
+	   		<scope>test</scope>
+	   	</dependency>
+	   	<!-- Apache Common IO -->
+	   	<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+		<!-- Extent reports -->
+		<dependency>
+		    <groupId>com.aventstack</groupId>
+		    <artifactId>extentreports</artifactId>
+		    <version>${extentreports.version}</version> 
+		</dependency>
+		<!-- Apache Common Lang  -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>${commons-lang3.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<suiteXmlFiles>
+						<!-- <suiteXmlFile>${suite}-chrome-testng.xml</suiteXmlFile>-->
+						<suiteXmlFile>${suite}-firefox-testng.xml</suiteXmlFile>
+						<!-- <useSystemClassLoader>false</useSystemClassLoader> -->
+					</suiteXmlFiles>
+					<argLine>-enableassertions</argLine>
+						<systemProperties>
+							<property>
+								<name>env</name>
+								<value>${env}</value>
+							</property>
+							<property>
+								<name>suite</name>
+								<value>${suite}</value>
+							</property>
+							<property>
+								<name>browser</name>
+								<value>${browser}</value>
+							</property>
+						</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

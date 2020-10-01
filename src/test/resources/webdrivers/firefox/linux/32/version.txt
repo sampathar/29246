@@ -1,0 +1,2 @@
+Current version-2.9
+Latest version download url = http://chromedriver.storage.googleapis.com/index.html
